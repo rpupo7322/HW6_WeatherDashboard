@@ -93,6 +93,7 @@ header h1 {
       margin: 20px;
       /* margin-left: 300px; */
       border: 1px solid black;
+      padding: 10px;
   }
 
   #weatherCards {
@@ -109,12 +110,9 @@ header h1 {
       height: 30vh;
       margin-left: 10px;
       margin-right: 10px;
+      padding: 10px;
   }
-  /* Style page content */
-  /* .main {
-    margin-left: 160px; /* Same as the width of the sidebar */
-    /* padding: 0px 10px;
-  } */ 
+
   
   /* On smaller screens, where height is less than 450px, change the style of the sidebar (less padding and a smaller font size) */
   @media screen and (max-height: 450px) {
