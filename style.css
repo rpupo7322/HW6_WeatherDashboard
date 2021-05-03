@@ -11,14 +11,16 @@ header {
     top: 0;
     left: 0;
     width: 100%;
-    border: 1px solid red;
+    /* border: 1px solid red; */
+    background-image: linear-gradient(to right, rgb(12, 12, 112) , rgb(82, 7, 82));
 }
 header h1 {
     text-align: center;
-
+    font-weight: bolder;
+    color: white;
 }
 
-.sidenav {
+#sidenav {
     height: 100%; /* Full-height: remove this if you want "auto" height */
     width: 300px; /* Set the width of the sidebar */
     position: fixed; /* Fixed Sidebar (stay in place on scroll) */
@@ -32,20 +34,31 @@ header h1 {
   }
   
   /* The navigation menu links */
-  .sidenav a {
+  #sidenav a {
     padding: 6px 8px 6px 16px;
     text-decoration: none;
     font-size: 25px;
     color: #818181;
     display: block;
   }
+
+#sidenav h2 {
+    margin: 10px;
+}
+
+  #border {
+    margin-top: 10px;  
+    margin-left: 10px;
+    margin-right: 10px;
+    border-bottom: 2px solid grey;
+  }
   
   /* When you mouse over the navigation links, change their color */
-  .sidenav a:hover {
+  #sidenav a:hover {
     color: #f1f1f1;
   }
   
-.sidenav input {
+#sidenav input {
     /* float: left; */
     padding: 6px;
     border: none;
@@ -54,7 +67,7 @@ header h1 {
     font-size: 17px;
 }
 
-.sidenav .searchContainer button {
+#sidenav .searchContainer button {
     /* float: left; */
     padding: 6px 10px;
     margin-top: 8px;
@@ -67,10 +80,36 @@ header h1 {
   }
 
 
-  .searchContainer input {
+  #searchContainer input {
        border: 1px solid grey;
   }
 
+#weatherContent {
+    margin-top: 100px;
+    margin-left: 300px;
+}
+
+  #currentWeather {
+      margin: 20px;
+      /* margin-left: 300px; */
+      border: 1px solid black;
+  }
+
+  #weatherCards {
+    display: flex;  
+    flex: auto;
+    flex-flow: row;
+    justify-content: space-between;
+    margin: 20px;
+  }
+
+  .card {
+      border: 1px solid blue;
+      width: 15vw;
+      height: 30vh;
+      margin-left: 10px;
+      margin-right: 10px;
+  }
   /* Style page content */
   /* .main {
     margin-left: 160px; /* Same as the width of the sidebar */
@@ -79,8 +118,7 @@ header h1 {
   
   /* On smaller screens, where height is less than 450px, change the style of the sidebar (less padding and a smaller font size) */
   @media screen and (max-height: 450px) {
-    .sidenav {padding-top: 15px;}
-    .sidenav a {font-size: 18px;}
+    #sidenav {padding-top: 15px;}
+    #sidenav a {font-size: 18px;}
   }
 
-    <input type="text" placeholder="Search..">
