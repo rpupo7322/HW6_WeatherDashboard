@@ -6,6 +6,7 @@ var lat;
 var long;
 var apiURL ;
 var apiResponse;
+var locationResponse;
 
 
 // navigator.geolocation.getCurrentPosition(success, error);
@@ -14,8 +15,31 @@ var apiResponse;
 //     console.log(searchbar.value)
 
 // })
-var c = 'atlanta'
-var s = 'ga'
+
+
+// https://api.surfline.com/v1/forecasts/5842041f4e65fad6a7708a65?
+// 'https://services.surfline.com/kbyg/spots/forecasts/wave?spotid=5842041f4e65fad6a7708a65'
+
+// surfCall();
+
+// function surfCall() {
+    //     $.ajax({
+        //         url: 'https://services.surfline.com/kbyg/spots/forecasts/?spotId=5842041f4e65fad6a7708a65&days=3&intervalHours=12&maxHeights=false',
+        //         method: 'GET',
+        //       })
+        //         .then(function (response) {
+            //         console.log(response);
+            //         // apiResponse = response;
+            //         // updateWeather();
+            //         })
+            //         .catch(function (error) { 
+                //             console.log('error:', error);
+                //         });
+                // }
+                
+                
+var c = 'oxford'
+var s = 'oh'
 
 generateLocation(c,s)
 
@@ -24,8 +48,8 @@ function searchSubmit() {
 }
 
 function generateLocation(city, state) {
-    locationURL = 'http://api.openweathermap.org/geo/1.0/direct?q=' + city + ',' + state  + '&appid=4905034d29ec196fc6fefde21b5e616e'
-    locationURL = 'http://api.openweathermap.org/geo/1.0/direct?q=' + city + '&appid=4905034d29ec196fc6fefde21b5e616e'
+    locationURL = 'http://api.openweathermap.org/geo/1.0/direct?q=' + city + ',' + state  + ',us&appid=4905034d29ec196fc6fefde21b5e616e'
+    // locationURL = 'http://api.openweathermap.org/geo/1.0/direct?q=' + city + '&appid=4905034d29ec196fc6fefde21b5e616e'
 
     console.log('geocall attempt')
     geoCall(locationURL)
@@ -40,6 +64,10 @@ function geoCall(url) {
         .then(function (response) {
         console.log("geocall")
             console.log(response);
+            locationResponse = response;
+            lat = locationResponse[0].lat;
+            long = locationResponse[0].lon;
+            console.log(lat,long)
         })
         .catch(function (error) { 
             console.log('error:', error);
@@ -60,7 +88,9 @@ function ajaxCall() {
             console.log('error:', error);
         });
 }
-    
+
+
+
     // console.log(lat)
     // console.log(long)
     

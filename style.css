@@ -79,6 +79,13 @@ header h1 {
     cursor: pointer;
   }
 
+  select {
+    margin-left: 10px;
+    margin: 10px;
+    width: 50%;
+    height: 30px;
+  }
+
 
   #searchContainer input {
        border: 1px solid grey;
