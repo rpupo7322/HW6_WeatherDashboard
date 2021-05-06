@@ -96,6 +96,10 @@ header h1 {
     margin-left: 300px;
 }
 
+#weatherContent h3 {
+    margin: 25px;
+}
+
   #currentWeather {
       margin: 20px;
       /* margin-left: 300px; */
@@ -118,6 +122,8 @@ header h1 {
       margin-left: 10px;
       margin-right: 10px;
       padding: 10px;
+      background-color: rgb(42, 36, 58);
+      color: white;
   }
 
   

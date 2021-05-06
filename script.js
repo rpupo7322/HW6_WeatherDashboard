@@ -10,7 +10,7 @@ var long;
 var apiURL ;
 var apiResponse;
 var locationResponse;
-
+var currentDate =  moment().format("MM/DD/YYYY"); 
 
 
 // navigator.geolocation.getCurrentPosition(success, error);
@@ -32,7 +32,7 @@ searchSubmit[0].addEventListener('click', function(){
 
 
 
-
+console.log('date', currentDate)
                 
 var c = 'new york city'
 var s = 'ny'
@@ -113,19 +113,25 @@ function ajaxCall() {
         // console.log("wind speed:", apiResponse.current.wind_speed)
         // console.log("humidity", apiResponse.current.humidity)
         // console.log("UVI Index: ", apiResponse.current.uvi)
-        current[0].children[1].textContent = 'Temp: ' + apiResponse.current.temp
-        current[0].children[2].textContent = 'Wind Speed: ' + apiResponse.current.wind_speed
-        current[0].children[3].textContent = 'Humidity: ' + apiResponse.current.humidity
-        current[0].children[4].textContent = 'UVI Index: ' + apiResponse.current.uvi
+        current[0].children[0].textContent = searchbar[0].value +' '+ currentDate 
+        current[0].children[1].textContent = 'Temp: ' + apiResponse.current.temp + ' °F'
+        current[0].children[2].textContent = 'Wind: ' + apiResponse.current.wind_speed + ' MPH'
+        current[0].children[3].textContent = 'Humidity: ' + apiResponse.current.humidity + ' %'
+        current[0].children[4].textContent = 'UVI Index: ' + apiResponse.current.uvi 
 
         
     }
     
     function updateCards (){
         for(i=0;i<cards.length;i++) {
-            cards[i].children[0].textContent = 'Temp: ' + apiResponse.daily[i+1].temp.day
-            cards[i].children[1].textContent = 'Wind Speed: ' + apiResponse.daily[i+1].wind_speed
-            cards[i].children[2].textContent = 'Humidity: ' + apiResponse.daily[i+1].humidity
+            
+            var s = new Date(apiResponse.daily[i+1].dt *1000); 
+            // var s = new Date(apiResponse.daily[i+1].dt).getDate()
+            console.log(s.toLocaleDateString())
+            cards[i].children[0].textContent = s.toLocaleDateString()
+            cards[i].children[1].textContent = 'Temp: ' + apiResponse.daily[i+1].temp.day + ' °F'
+            cards[i].children[2].textContent = 'Wind: ' + apiResponse.daily[i+1].wind_speed + ' MPH'
+            cards[i].children[3].textContent = 'Humidity: ' + apiResponse.daily[i+1].humidity + ' %'
         }
     }
     
