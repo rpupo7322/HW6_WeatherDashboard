@@ -2,6 +2,9 @@ var cards = $('.card');
 var current = $('#currentWeather')
 var sidebar = $('#sidenav')
 var searchbar = $('#searchbar')
+var search = $('#searchContainer')
+var states = $('#states')
+var searchSubmit = $('#submission')
 var lat;
 var long;
 var apiURL ;
@@ -9,34 +12,21 @@ var apiResponse;
 var locationResponse;
 
 
-// navigator.geolocation.getCurrentPosition(success, error);
 
-// searchbar.addEventListener('submit', function(){
-//     console.log(searchbar.value)
+navigator.geolocation.getCurrentPosition(success, error);
 
-// })
+searchbar[0].addEventListener('keypress', function(e){
+    if (e.key === 'Enter') {
+        console.log(searchbar[0].value)
+        console.log($('#states option:selected')[0].value)
+    }
+})
+searchSubmit[0].addEventListener('click', function(){
+        console.log(searchbar[0].value)
+        console.log($('#states option:selected')[0].value)
+})
 
 
-// https://api.surfline.com/v1/forecasts/5842041f4e65fad6a7708a65?
-// 'https://services.surfline.com/kbyg/spots/forecasts/wave?spotid=5842041f4e65fad6a7708a65'
-
-// surfCall();
-
-// function surfCall() {
-    //     $.ajax({
-        //         url: 'https://services.surfline.com/kbyg/spots/forecasts/?spotId=5842041f4e65fad6a7708a65&days=3&intervalHours=12&maxHeights=false',
-        //         method: 'GET',
-        //       })
-        //         .then(function (response) {
-            //         console.log(response);
-            //         // apiResponse = response;
-            //         // updateWeather();
-            //         })
-            //         .catch(function (error) { 
-                //             console.log('error:', error);
-                //         });
-                // }
-                
                 
 var c = 'oxford'
 var s = 'oh'
@@ -45,13 +35,14 @@ generateLocation(c,s)
 
 function searchSubmit() {
     var query = searchbar.value
+    var state = states.value 
 }
 
 function generateLocation(city, state) {
     locationURL = 'http://api.openweathermap.org/geo/1.0/direct?q=' + city + ',' + state  + ',us&appid=4905034d29ec196fc6fefde21b5e616e'
     // locationURL = 'http://api.openweathermap.org/geo/1.0/direct?q=' + city + '&appid=4905034d29ec196fc6fefde21b5e616e'
 
-    console.log('geocall attempt')
+    // console.log('geocall attempt')
     geoCall(locationURL)
 }
 
@@ -62,12 +53,12 @@ function geoCall(url) {
         method: 'GET',
       })
         .then(function (response) {
-        console.log("geocall")
-            console.log(response);
+        // console.log("geocall")
+            // console.log(response);
             locationResponse = response;
             lat = locationResponse[0].lat;
             long = locationResponse[0].lon;
-            console.log(lat,long)
+            // console.log(lat,long)
         })
         .catch(function (error) { 
             console.log('error:', error);
@@ -98,29 +89,36 @@ function ajaxCall() {
     
     function generateURL () {
         apiURL = 'https://api.openweathermap.org/data/2.5/onecall?lat=' + lat + '&lon=' + long + '&units=imperial&exclude=minutely,hourly&appid=4905034d29ec196fc6fefde21b5e616e'
-        console.log(apiURL)
+        // console.log(apiURL)
+        ajaxCall()
     }
   
     
     function updateWeather(){
-        // updateCards();
+        updateCards();
         updateCurrent();
         // console.log('1')
     }
     
     function updateCurrent() {
         // response.chi
-        console.log("temp: ", apiResponse.current.temp)
-        console.log("wind speed:", apiResponse.current.wind_speed)
-        console.log("humidity", apiResponse.current.humidity)
-        console.log("UVI Index: ", apiResponse.current.uvi)
+        // console.log("temp: ", apiResponse.current.temp)
+        // console.log("wind speed:", apiResponse.current.wind_speed)
+        // console.log("humidity", apiResponse.current.humidity)
+        // console.log("UVI Index: ", apiResponse.current.uvi)
+        current[0].children[1].textContent = 'Temp: ' + apiResponse.current.temp
+        current[0].children[2].textContent = 'Wind Speed: ' + apiResponse.current.wind_speed
+        current[0].children[3].textContent = 'Humidity: ' + apiResponse.current.humidity
+        current[0].children[4].textContent = 'UVI Index: ' + apiResponse.current.uvi
 
         
     }
     
     function updateCards (){
         for(i=0;i<cards.length;i++) {
-            
+            cards[i].children[0].textContent = 'Temp: ' + apiResponse.daily[i+1].temp.day
+            cards[i].children[1].textContent = 'Wind Speed: ' + apiResponse.daily[i+1].wind_speed
+            cards[i].children[2].textContent = 'Humidity: ' + apiResponse.daily[i+1].humidity
         }
     }
     
@@ -132,10 +130,10 @@ function ajaxCall() {
         long = coordinates.longitude;
         generateURL();
         ajaxCall();
-        console.log('Your current position is:');
-        console.log(`Latitude : ${coordinates.latitude}`);
-        console.log(`Longitude: ${coordinates.longitude}`);
-        console.log(`More or less ${coordinates.accuracy} meters.`);
+        // console.log('Your current position is:');
+        // console.log(`Latitude : ${coordinates.latitude}`);
+        // console.log(`Longitude: ${coordinates.longitude}`);
+        // console.log(`More or less ${coordinates.accuracy} meters.`);
     }
     
     function error(err) {
