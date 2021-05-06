@@ -13,25 +13,31 @@ var locationResponse;
 
 
 
-navigator.geolocation.getCurrentPosition(success, error);
+// navigator.geolocation.getCurrentPosition(success, error);
 
 searchbar[0].addEventListener('keypress', function(e){
     if (e.key === 'Enter') {
         console.log(searchbar[0].value)
         console.log($('#states option:selected')[0].value)
+        generateLocation(searchbar[0].value,$('#states option:selected')[0].value)
+        console.log('attempt',lat,long)
     }
 })
 searchSubmit[0].addEventListener('click', function(){
         console.log(searchbar[0].value)
         console.log($('#states option:selected')[0].value)
+        generateLocation(searchbar[0].value,$('#states option:selected')[0].value)
+        console.log('attempt',lat,long)
 })
 
 
-                
-var c = 'oxford'
-var s = 'oh'
 
-generateLocation(c,s)
+
+                
+var c = 'new york city'
+var s = 'ny'
+
+// generateLocation(c,s)
 
 function searchSubmit() {
     var query = searchbar.value
@@ -54,11 +60,12 @@ function geoCall(url) {
       })
         .then(function (response) {
         // console.log("geocall")
-            // console.log(response);
+            console.log(response);
             locationResponse = response;
             lat = locationResponse[0].lat;
             long = locationResponse[0].lon;
-            // console.log(lat,long)
+            console.log('legit',lat,long)
+            generateURL();
         })
         .catch(function (error) { 
             console.log('error:', error);
