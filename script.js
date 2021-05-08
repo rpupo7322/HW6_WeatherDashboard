@@ -123,10 +123,11 @@ function ajaxCall() {
         // console.log("humidity", apiResponse.current.humidity)
         // console.log("UVI Index: ", apiResponse.current.uvi)
         current[0].children[0].textContent = currentCity +' '+ currentDate 
-        current[0].children[1].textContent = 'Temp: ' + apiResponse.current.temp + ' °F'
-        current[0].children[2].textContent = 'Wind: ' + apiResponse.current.wind_speed + ' MPH'
-        current[0].children[3].textContent = 'Humidity: ' + apiResponse.current.humidity + ' %'
-        current[0].children[4].textContent = 'UVI Index: ' + apiResponse.current.uvi 
+        current[0].children[1].setAttribute('src', `https://openweathermap.org/img/wn/${apiResponse.current.weather[0].icon}@2x.png`)
+        current[0].children[2].textContent = 'Temp: ' + apiResponse.current.temp + ' °F'
+        current[0].children[3].textContent = 'Wind: ' + apiResponse.current.wind_speed + ' MPH'
+        current[0].children[4].textContent = 'Humidity: ' + apiResponse.current.humidity + ' %'
+        current[0].children[5].textContent = 'UVI Index: ' + apiResponse.current.uvi 
 
         
     }
@@ -138,9 +139,11 @@ function ajaxCall() {
             // var s = new Date(apiResponse.daily[i+1].dt).getDate()
             // console.log(s.toLocaleDateString())
             cards[i].children[0].textContent = s.toLocaleDateString()
-            cards[i].children[1].textContent = 'Temp: ' + apiResponse.daily[i+1].temp.day + ' °F'
-            cards[i].children[2].textContent = 'Wind: ' + apiResponse.daily[i+1].wind_speed + ' MPH'
-            cards[i].children[3].textContent = 'Humidity: ' + apiResponse.daily[i+1].humidity + ' %'
+            cards[i].children[1].setAttribute('src', `https://openweathermap.org/img/wn/${apiResponse.daily[i+1].weather[0].icon}@2x.png`)
+            // cards[i].children[1].src = url('http://openweathermap.org/img/wn/10d@2x.png')
+            cards[i].children[2].textContent = 'Temp: ' + apiResponse.daily[i+1].temp.day + ' °F'
+            cards[i].children[3].textContent = 'Wind: ' + apiResponse.daily[i+1].wind_speed + ' MPH'
+            cards[i].children[4].textContent = 'Humidity: ' + apiResponse.daily[i+1].humidity + ' %'
         }
     }
     

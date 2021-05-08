@@ -151,3 +151,14 @@ header h1 {
   display: block;
   margin-left: 10px;
 }
+
+#currentTitle, .Date {
+  display: inline-block;
+  margin-bottom: -15px;
+}
+
+.card img, #currentWeather img {
+  display: inline-block;
+  width: 45px;
+  margin-bottom: -15px;
+}
