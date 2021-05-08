@@ -13,7 +13,7 @@ var locationResponse;
 var currentDate =  moment().format("MM/DD/YYYY"); 
 
 
-// navigator.geolocation.getCurrentPosition(success, error);
+navigator.geolocation.getCurrentPosition(success, error);
 
 searchbar[0].addEventListener('keypress', function(e){
     if (e.key === 'Enter') {
