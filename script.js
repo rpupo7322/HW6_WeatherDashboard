@@ -5,12 +5,14 @@ var searchbar = $('#searchbar')
 var search = $('#searchContainer')
 var states = $('#states')
 var searchSubmit = $('#submission')
+var pastSearches = $('#pastSearches')
 var lat;
 var long;
 var apiURL ;
 var apiResponse;
 var locationResponse;
 var currentDate =  moment().format("MM/DD/YYYY"); 
+var currentCity;
 
 
 navigator.geolocation.getCurrentPosition(success, error);
@@ -19,6 +21,7 @@ searchbar[0].addEventListener('keypress', function(e){
     if (e.key === 'Enter') {
         console.log(searchbar[0].value)
         console.log($('#states option:selected')[0].value)
+        generatePastSearch(searchbar[0].value,$('#states option:selected')[0].value);
         generateLocation(searchbar[0].value,$('#states option:selected')[0].value)
         console.log('attempt',lat,long)
     }
@@ -26,6 +29,7 @@ searchbar[0].addEventListener('keypress', function(e){
 searchSubmit[0].addEventListener('click', function(){
         console.log(searchbar[0].value)
         console.log($('#states option:selected')[0].value)
+        generatePastSearch(searchbar[0].value,$('#states option:selected')[0].value);
         generateLocation(searchbar[0].value,$('#states option:selected')[0].value)
         console.log('attempt',lat,long)
 })
@@ -46,6 +50,7 @@ function searchSubmit() {
 
 function generateLocation(city, state) {
     locationURL = 'http://api.openweathermap.org/geo/1.0/direct?q=' + city + ',' + state  + ',us&appid=4905034d29ec196fc6fefde21b5e616e'
+    currentCity = city.charAt(0).toUpperCase() + city.slice(1)
     // locationURL = 'http://api.openweathermap.org/geo/1.0/direct?q=' + city + '&appid=4905034d29ec196fc6fefde21b5e616e'
 
     // console.log('geocall attempt')
@@ -113,7 +118,7 @@ function ajaxCall() {
         // console.log("wind speed:", apiResponse.current.wind_speed)
         // console.log("humidity", apiResponse.current.humidity)
         // console.log("UVI Index: ", apiResponse.current.uvi)
-        current[0].children[0].textContent = searchbar[0].value +' '+ currentDate 
+        current[0].children[0].textContent = currentCity +' '+ currentDate 
         current[0].children[1].textContent = 'Temp: ' + apiResponse.current.temp + ' °F'
         current[0].children[2].textContent = 'Wind: ' + apiResponse.current.wind_speed + ' MPH'
         current[0].children[3].textContent = 'Humidity: ' + apiResponse.current.humidity + ' %'
@@ -127,7 +132,7 @@ function ajaxCall() {
             
             var s = new Date(apiResponse.daily[i+1].dt *1000); 
             // var s = new Date(apiResponse.daily[i+1].dt).getDate()
-            console.log(s.toLocaleDateString())
+            // console.log(s.toLocaleDateString())
             cards[i].children[0].textContent = s.toLocaleDateString()
             cards[i].children[1].textContent = 'Temp: ' + apiResponse.daily[i+1].temp.day + ' °F'
             cards[i].children[2].textContent = 'Wind: ' + apiResponse.daily[i+1].wind_speed + ' MPH'
@@ -158,7 +163,21 @@ function ajaxCall() {
     }
     
     
+function generatePastSearch(a, b) {
+    var li = document.createElement('li');
+    var city = a.charAt(0).toUpperCase() + a.slice(1)
+    li.textContent = city +', ' + b;
+    li.value = b;
+    li.addEventListener('click', function(){
+        generateLocation(a, b)
+        console.log(a, b)
+    })
+    pastSearches[0].appendChild(li);
+    console.log(li)
+}    
     
-    
-    
-cards[0].children[0].textContent = 'seventy four'
+// for (i=0;i < sortedScores.length;i++) {
+//     var score = sortedScores[i];
+//     var li = document.createElement("li");
+//     li.textContent = score.name + ':   ' + score.score;
+//     scores.appendChild(li);

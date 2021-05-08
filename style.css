@@ -143,5 +143,5 @@ header h1 {
   width: 150px; 
   text-align: center;
   color: white;
-
+  cursor: pointer;
 }
