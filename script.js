@@ -6,6 +6,7 @@ var search = $('#searchContainer')
 var states = $('#states')
 var searchSubmit = $('#submission')
 var pastSearches = $('#pastSearches')
+var currentLocation = $('#currentLocation')
 var lat;
 var long;
 var apiURL ;
@@ -15,7 +16,10 @@ var currentDate =  moment().format("MM/DD/YYYY");
 var currentCity;
 
 
-navigator.geolocation.getCurrentPosition(success, error);
+currentLocation[0].addEventListener('click', function(){
+    navigator.geolocation.getCurrentPosition(success, error);
+
+})
 
 searchbar[0].addEventListener('keypress', function(e){
     if (e.key === 'Enter') {
@@ -143,9 +147,11 @@ function ajaxCall() {
     
     // initialize the forecast for current location using navigator geolocation
     function success(pos) {
+        console.log(pos)
         var coordinates = pos.coords;
         lat = coordinates.latitude;
         long = coordinates.longitude;
+        currentCity = 'My Current Location (lat:' + lat +', lon:' + long + ')'
         generateURL();
         ajaxCall();
         // console.log('Your current position is:');
