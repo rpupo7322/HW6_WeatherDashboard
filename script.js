@@ -108,7 +108,14 @@ function updateCurrent() {
     current[0].children[3].textContent = 'Wind: ' + apiResponse.current.wind_speed + ' MPH'
     current[0].children[4].textContent = 'Humidity: ' + apiResponse.current.humidity + ' %'
     current[0].children[5].textContent = 'UVI Index: ' + apiResponse.current.uvi 
-
+    if (apiResponse.current.uvi > 5) {
+        current[0].children[5].style.color = 'Red'
+    } else if (apiResponse.current.uvi > 2) {
+        current[0].children[5].style.color = 'Yellow'
+    }
+    else {
+        current[0].children[5].style.color = 'Green'
+    }
     
 }
 
